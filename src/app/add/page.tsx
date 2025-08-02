@@ -1,5 +1,6 @@
-import { login } from '@/app/login/actions'
+import { PushData } from '@/app/add/actions'
 
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -22,38 +24,55 @@ export default function LoginPage() {
           Enter your email below to login to your account
         </CardDescription>
       </CardHeader>
-      <form action={login}>
+      <form action={PushData}>
       <CardContent>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="quantity">Quantity</Label>
               <Input
-                id="email"
-                type="email"
-                name='email'
-                placeholder="m@example.com"
+                id="quantity"
+                type="text"
+                name='quantity'
+                placeholder="1/3"
                 required
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-              </div>
-              <Input id="password" name="password" type="password" required />
+              <Label htmlFor="additionalNotes">Notes</Label>
+              <Input
+                id="additionalNotes"
+                type="text"
+                name='additionalNotes'
+                placeholder="He didn't eat it all, but he came back to eat it half an hour later"
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="wetFood">Wet Food</Label>
+              <Checkbox
+                id="wetFood"
+                name='wetFood'
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="dryFood">Dry Food</Label>
+              <Checkbox
+                id="dryFood"
+                name='dryFood'
+              />
             </div>
           </div>
       </CardContent>
       <br />
       <CardFooter className="flex-col gap-2">
         <Button type="submit" className="w-full">
-          Login
+          Add the record!
         </Button>
-        <p>This web application is invitation-only</p>
-        <a href='/error/invitation'> 
-          <Button type="button" className="w-full">
-          Ask to be invited
-          </Button>
-        </a>
+          <Link href={"/"}>
+            <Button type="button" className="w-full" variant={"secondary"}>
+            Back to the main page!
+            </Button>
+          </Link>
       </CardFooter>
       </form>
     </Card>
