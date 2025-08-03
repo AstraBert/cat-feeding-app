@@ -9,7 +9,13 @@ import {
 import {
   Button,
 } from "@/components/ui/button"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 
+import Link from "next/link";
 import RefreshButton from '@/components/custom/RefreshButton';
 
 async function FeedingTimes() {
@@ -20,7 +26,7 @@ async function FeedingTimes() {
 
 export default async function MainPage() {
   const data = await FeedingTimes() ?? [];
-  
+
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
@@ -28,7 +34,16 @@ export default async function MainPage() {
           <h1 className="text-3xl font-bold">Feeding Times for Puma</h1>
           <RefreshButton />
         </div>
-        
+        <div className='flex justify-center items-center'>
+          <Link href={"https://pumathecat.top"}>
+          <Avatar style={{ width: '120px', height: '120px' }}>
+            <AvatarImage src="kitty-puma.jpg" alt="Pumito the Catito"/>
+            <AvatarFallback>PtC</AvatarFallback>
+          </Avatar>
+          </Link>
+        </div>
+        <br />
+        <br />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.map((dataPoint) => (
             <Card key={dataPoint.id} className="w-full">
@@ -46,24 +61,24 @@ export default async function MainPage() {
                     <span className="text-sm font-medium text-gray-600">Quantity:</span>
                     <span className="font-semibold">{dataPoint.quantity}</span>
                   </div>
-                  
+
                   {/* Food Type Checkboxes */}
                   <div className="space-y-2">
                     <span className="text-sm font-medium text-gray-600">Food Type:</span>
                     <div className="flex gap-4">
                       <div className="flex items-center space-x-2">
-                        <input 
-                          type="checkbox" 
-                          checked={dataPoint.dryFood} 
+                        <input
+                          type="checkbox"
+                          checked={dataPoint.dryFood}
                           readOnly
                           className="w-4 h-4 rounded border-gray-300"
                         />
                         <label className="text-sm">Dry Food</label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input 
-                          type="checkbox" 
-                          checked={dataPoint.wetFood} 
+                        <input
+                          type="checkbox"
+                          checked={dataPoint.wetFood}
                           readOnly
                           className="w-4 h-4 rounded border-gray-300"
                         />
@@ -71,7 +86,7 @@ export default async function MainPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div>
                     <span className="text-sm font-medium text-gray-600">Notes:</span>
                     <p className="text-sm mt-1 text-gray-800">
@@ -83,7 +98,7 @@ export default async function MainPage() {
             </Card>
           ))}
         </div>
-        
+
         {/* Summary Card */}
         <Card className="mt-8 max-w-sm mx-auto">
           <CardContent className="pt-6">
