@@ -49,10 +49,24 @@ export default async function MainPage() {
             <Card key={dataPoint.id} className="w-full">
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {new Date(dataPoint.feedingTime).toLocaleDateString()}
+                  {new Date(dataPoint.feedingTime).toLocaleDateString('en-US', {
+                    timeZone: 'Europe/Berlin',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
                 </CardTitle>
                 <CardDescription>
-                  {new Date(dataPoint.feedingTime).toLocaleTimeString()}
+                  {new Date(dataPoint.feedingTime).toLocaleDateString('en-US', {
+                    timeZone: 'Europe/Berlin',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
                 </CardDescription>
               </CardHeader>
               <CardContent>
