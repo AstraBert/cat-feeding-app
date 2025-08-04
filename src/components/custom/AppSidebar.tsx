@@ -1,4 +1,4 @@
-import { Home, PlusCircle } from "lucide-react"
+import { Home, PlusCircle, ImagePlus } from "lucide-react"
 
 import {
   Sidebar,
@@ -22,6 +22,11 @@ const items = [
     title: "Add a Record",
     url: "/add",
     icon: PlusCircle,
+  },
+  {
+    title: "Add a Picture",
+    url: "/picture",
+    icon: ImagePlus,
   },
 ]
 

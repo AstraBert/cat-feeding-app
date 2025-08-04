@@ -79,6 +79,41 @@ true
 
 This is all that is needed to run the application!
 
+If you also want to enable picture uploading, you should [create a public bucket](https://supabase.com/docs/guides/storage/buckets/creating-buckets) named `pictures`, and create [an access policy](https://supabase.com/docs/guides/storage/security/access-control#access-policies) to restrict uploading files only to authenticated roles.
+
+After that, create a `pictures` table:
+
+```sql
+CREATE TABLE pictures (
+    id INT PRIMARY KEY,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    filePath TEXT,
+    url TEXT,
+    caption TEXT DEFAULT NULL,
+);
+```
+
+And then create a policies that allows reading from anon and writing from authenticated:
+
+```sql
+-- Allow both anonymous and authenticated users to read the database table
+CREATE POLICY "public can read pictures" ON public.pictures
+FOR SELECT TO anon, authenticated
+USING (true);
+```
+
+```sql
+-- Allow only authenticated users to write the database table
+create policy "authenticated can read pictures"
+on "public"."pictures"
+as PERMISSIVE
+for INSERT
+to authenticated
+with check (
+true
+);
+```
+
 ### 3. Run the App
 
 In development environments, run the app with:

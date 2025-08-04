@@ -131,6 +131,13 @@ export default async function MainPage() {
         </Button>
         </a>
         </div>
+        <div className="max-h-screen flex items-center justify-center p-4">
+        <a href="/picture">
+        <Button>
+          Add a Picture of Pumito
+        </Button>
+        </a>
+        </div>
       </div>
     </div>
   )
